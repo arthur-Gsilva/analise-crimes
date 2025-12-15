@@ -1,6 +1,6 @@
-const { Builder, By, until, Key } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
-const path = require('path');
+import { Builder, By, until, Key } from 'selenium-webdriver';
+import chrome from 'selenium-webdriver/chrome';
+import path from 'path';
 
 const TIMEOUT = 30000;
 const URL_BASE = 'http://localhost:3000';
