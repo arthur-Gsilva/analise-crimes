@@ -1,0 +1,86 @@
+TESTES FUNCIONAIS COM SELENIUM
+
+O QUE FOI FEITO:
+
+1. Instalei Selenium WebDriver e ChromeDriver
+   Selenium controla o navegador automaticamente
+   ChromeDriver faz a ponte entre Selenium e Chrome
+
+2. Criei arquivo src/tests/plataforma.functional.test.js com 4 testes:
+
+   FLUXO 1 - Dashboard com Filtros
+   - Abre /paineis
+   - Preenche ano inicial (2020) e final (2024)
+   - Seleciona região AGRESTE
+   - Clica "Aplicar Filtros"
+   - Verifica se gráficos foram atualizados
+
+   FLUXO 2 - Chatbot e PDF
+   - Abre /chatbot
+   - Digita "Quantas vítimas teve Recife em 2024?"
+   - Envia mensagem
+   - Aguarda resposta da IA (até 60s)
+   - Verifica se mensagem apareceu
+   - Tenta exportar PDF
+
+   FLUXO 3 - Previsão ML
+   - Abre página inicial /
+   - Seleciona município RECIFE
+   - Preenche mês 6 e ano 2026
+   - Marca "Sim" para jogo do Brasileirão
+   - Clica "Gerar Previsão"
+   - Verifica se resultado numérico apareceu
+
+   FLUXO 4 - Mapa de Calor
+   - Abre /mapa
+   - Altera mês para Janeiro
+   - Aguarda mapa Leaflet carregar
+   - Clica em um município
+   - Verifica se popup aparece
+
+3. Adicionei scripts no package.json:
+   npm run test:functional
+   npm run test:functional:verbose
+
+COMO RODAR:
+
+Terminal 1:
+cd Front
+npm run dev
+
+Terminal 2:
+cd python-ml
+uvicorn main:app --reload
+
+Terminal 3:
+cd Front
+npm run test:functional
+
+POR QUE É IMPORTANTE:
+
+Testa a aplicação COMPLETA (frontend + backend + banco + ML + IA)
+Simula usuário real usando o navegador
+Detecta bugs que testes unitários não pegam
+Valida integração entre todas as partes do sistema
+Garante que funcionalidades principais funcionam de ponta a ponta
+Pode rodar automaticamente em CI/CD
+
+RESULTADO ESPERADO:
+
+PASS  test/plataforma.functional.test.js
+  ✓ Fluxo 1: Dashboard (8s)
+  ✓ Fluxo 2: Chatbot (45s)
+  ✓ Fluxo 3: Previsão ML (12s)
+  ✓ Fluxo 4: Mapa (10s)
+
+Test Suites: 1 passed
+Tests: 4 passed
+
+REQUISITOS:
+
+PostgreSQL rodando com dados
+Next.js em localhost:3000
+FastAPI em localhost:8000
+Chrome instalado
+OPENAI_API_KEY configurada no .env.local
+Modelo .pkl treinado
